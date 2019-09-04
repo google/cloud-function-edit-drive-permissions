@@ -81,6 +81,7 @@ Enable the following APIs in your GCP project:
 - Token Service
 - Pub/Sub
 - Functions
+- Compute Engine
 
 <p align="center">
   <img src="https://storage.googleapis.com/thingthingthing/readme6.png" width="600px"/>
