@@ -74,10 +74,10 @@ Enable the following APIs in your GCP project:
 - Admin SDK
 - Google Drive
 - Service Usage
-- Billing
 - Resource Manager
 - Stackdriver
-- IAM and IAM Service Account Credentials
+- IAM
+- IAM Service Account Credentials
 - Token Service
 - Pub/Sub
 - Functions
@@ -95,7 +95,7 @@ Go back to **IAM & admin** and click **Service Accounts**.
   <img src="https://storage.googleapis.com/thingthingthing/readme7.png" width="600px"/>
 </p>
 
-Find the App Engine default service account. We will use **{service-account-name}** to reference it and it should end with "@appspot.gserviceaccount.com"). Give the service account Project Owner permissions.
+Find the App Engine default service account. We will use **{service-account-name}** to reference it and it should end with "@appspot.gserviceaccount.com").
 
 <p align="center">
   <img src="https://storage.googleapis.com/thingthingthing/readme8.png" width="600px"/>
@@ -125,7 +125,7 @@ From the project dropdown at the top of the console, click the Organization that
   <img src="https://storage.googleapis.com/thingthingthing/readme11.png" width="600px"/>
 </p>
 
-Find the App Engine default service account and give it the “Service Account Token Creator” role.
+Find the App Engine default service account and give it the “Service Account Token Creator” and "Project Editor" roles.
 
 <p align="center">
   <img src="https://storage.googleapis.com/thingthingthing/readme20.png" width="600px"/>
@@ -143,8 +143,8 @@ Log into the [GSuite Admin console](admin.google.com) using **{gsuite-admin-emai
   <img src="https://storage.googleapis.com/thingthingthing/readme13.png" width="600px"/>
 </p>
 
-For **{service-account-name}**, set the following scopes by pasting this into the scopes field:
-https://www.googleapis.com/auth/drive,https://www.googleapis.com/auth/iam
+For **{service-account-name}**, set the following scopes by pasting the service account's Unique ID number, e.g., 100518674616449638338, in the name field and pasting this into the scopes field:
+https://www.googleapis.com/auth/admin.directory.user,https://www.googleapis.com/auth/drive,https://www.googleapis.com/auth/iam
 
 ##### Step 5. Package the Zip file
 
