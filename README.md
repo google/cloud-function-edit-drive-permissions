@@ -30,7 +30,7 @@ This sample Cloud Function code is designed to remove permissions from a Drive f
 The scope of this package **only pertains to parts 5 and 6** in the graphic below. For previous parts 1-4, please refer to this [repository](https://github.com/ocervell/terraform-google-gsuite-export) to get those elements set up.
 
 <p align="center">
-  <img src="https://storage.googleapis.com/thingthingthing/readme1.png" width="600px"/>
+  <img src="https://storage.googleapis.com/cloud-function-edit-drive-permissions/github1.png" width="600px"/>
 </p>
 
 ##### Definitions
@@ -53,19 +53,19 @@ So let's create the project by going to [console.cloud.google.com](console.cloud
 From the sidebar menu, go to **IAM & admin** and click **IAM**.
 
 <p align="center">
-  <img src="https://storage.googleapis.com/thingthingthing/readme3.png" width="600px"/>
+  <img src="https://storage.googleapis.com/cloud-function-edit-drive-permissions/github2.png" width="600px"/>
 </p>
 
 Click **"Add"**
 
 <p align="center">
-  <img src="https://storage.googleapis.com/thingthingthing/readme4.png" width="600px"/>
+  <img src="https://storage.googleapis.com/cloud-function-edit-drive-permissions/github3.png" width="600px"/>
 </p>
 
 Give **{gsuite-admin-email}** the Project Owner role.
 
 <p align="center">
-  <img src="https://storage.googleapis.com/thingthingthing/readme5.png" width="600px"/>
+  <img src="https://storage.googleapis.com/cloud-function-edit-drive-permissions/github4.png" width="600px"/>
 </p>
 
 ##### Step 2: Enable APIs
@@ -84,7 +84,7 @@ Enable the following APIs in your GCP project:
 - Compute Engine
 
 <p align="center">
-  <img src="https://storage.googleapis.com/thingthingthing/readme6.png" width="600px"/>
+  <img src="https://storage.googleapis.com/cloud-function-edit-drive-permissions/github5.png" width="600px"/>
 </p>
 
 ##### Step 3. Configure service account for the Cloud Functions
@@ -92,55 +92,39 @@ Enable the following APIs in your GCP project:
 Go back to **IAM & admin** and click **Service Accounts**.
 
 <p align="center">
-  <img src="https://storage.googleapis.com/thingthingthing/readme7.png" width="600px"/>
+  <img src="https://storage.googleapis.com/cloud-function-edit-drive-permissions/github6.png" width="600px"/>
 </p>
 
 Find the App Engine default service account. We will use **{service-account-name}** to reference it and it should end with "@appspot.gserviceaccount.com").
 
-<p align="center">
-  <img src="https://storage.googleapis.com/thingthingthing/readme8.png" width="600px"/>
-</p>
-
 Create a JSON key and download the credential. We'll refer to this file as **{credential-file}**.
-
-<p align="center">
-  <img src="https://storage.googleapis.com/thingthingthing/readme2.png" width="600px"/>
-</p>
 
 Give the service account domain-wide delegation, by first clicking **Edit** on the right-side options menu.
 
 <p align="center">
-  <img src="https://storage.googleapis.com/thingthingthing/readme9.png" width="600px"/>
+  <img src="https://storage.googleapis.com/cloud-function-edit-drive-permissions/github7.png" width="600px"/>
 </p>
 
 Click **Show Domain-Wide Delegation** and enable.
 
 <p align="center">
-  <img src="https://storage.googleapis.com/thingthingthing/readme10.png" width="600px"/>
+  <img src="https://storage.googleapis.com/cloud-function-edit-drive-permissions/github8.png" width="600px"/>
 </p>
 
 From the project dropdown at the top of the console, click the Organization that matches the domain you're working under and click **IAM & admin**.
 
-<p align="center">
-  <img src="https://storage.googleapis.com/thingthingthing/readme11.png" width="600px"/>
-</p>
-
 Find the App Engine default service account and give it the “Service Account Token Creator” and "Project Editor" roles.
-
-<p align="center">
-  <img src="https://storage.googleapis.com/thingthingthing/readme20.png" width="600px"/>
-</p>
 
 ##### Step 4. Setup service account scopes in the GSuite admin console
 
 Log into the [GSuite Admin console](admin.google.com) using **{gsuite-admin-email}**, then go to **Security** -> **Advanced Settings** -> **Manage API Scopes**
 
 <p align="center">
-  <img src="https://storage.googleapis.com/thingthingthing/readme12.png" width="600px"/>
+  <img src="https://storage.googleapis.com/cloud-function-edit-drive-permissions/github9.png" width="600px"/>
 </p>
 
 <p align="center">
-  <img src="https://storage.googleapis.com/thingthingthing/readme13.png" width="600px"/>
+  <img src="https://storage.googleapis.com/cloud-function-edit-drive-permissions/github10.png" width="600px"/>
 </p>
 
 For **{service-account-name}**, set the following scopes by pasting the service account's Unique ID number, e.g., 100518674616449638338, in the name field and pasting this into the scopes field:
@@ -160,19 +144,12 @@ From here, package the files in your current directory into a Zip file. At a min
 
 Upload this Zip into a bucket using Cloud Storage. We'll reference this bucket as **{bucket-name}**.
 
-<p align="center">
-  <img src="https://storage.googleapis.com/thingthingthing/readme14.png" width="600px"/>
-</p>
 
 ##### Step 6. Create your Cloud Function
 
 We will finally set up the Cloud Function that will strip domain-visibility from Drive documents.
 
 Go to left menu and hit “Cloud Functions” then create a new Function.
-
-<p align="center">
-  <img src="https://storage.googleapis.com/thingthingthing/readme15.png" width="600px"/>
-</p>
 
 
 Set **Trigger** to the Pub/Sub topic that is carrying the drive audit events. Again, this can be set up using this [Terraform](https://github.com/ocervell/terraform-google-gsuite-export).
